@@ -62,9 +62,9 @@ oDiv.beDecorated.scoped.scope = {
 }
 ```
 
-From the example above, it could be argued that it may best to just send down JSON data itself.  
+From the simple example above, it could be argued that it may best to just send down JSON data itself.  
 
-But this could be useful when working with:
+But be-derived could reduce bandwidth when working with:
 
 1.  Large numbers of products / the unspecified table has lots of rows.  And/or
 2.  If the entire DOM structure shown above is repeated many times, and the hydrating logic which be-derived is part of is not included with each instance, but rather is applied across all such instances.
