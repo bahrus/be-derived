@@ -66,5 +66,5 @@ From the example above, it could be argued that it may best to just send down JS
 
 But this could be useful when working with:
 
-1.  Large numbers of products / tables.
+1.  Large numbers of products / the unspecified table has lots of rows.  And/or
 2.  If the entire DOM structure shown above is repeated many times, and the hydrating logic which be-derived is part of is not included with each instance, but rather is applied across all such instances.
