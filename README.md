@@ -36,9 +36,9 @@ oDiv.beDecorated.scoped.scope = {
     greeting: 'Hello',
     dayOfEvent: new Date('2018-07-07T20:00:00'),
     products: [
-        {productID: 21053, description: 'Cherry Tomato'},
-        {productID: 21054, description: 'Beef Tomato'},
-        {productID: 21055, description: 'Snack Tomato'}
+        {productId: 21053, description: 'Cherry Tomato'},
+        {productId: 21054, description: 'Beef Tomato'},
+        {productId: 21055, description: 'Snack Tomato'}
     ]
 }
 ```
