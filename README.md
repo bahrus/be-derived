@@ -12,6 +12,16 @@
         <li><data value="21054">Beef Tomato</data></li>
         <li><data value="21055">Snack Tomato</data></li>
     </ul>
+    <table>
+        <tr>
+            <th>Month</th>
+            <th>Savings</th>
+        </tr>
+        <tr>
+            <td>January</td>
+            <td>$100</td>
+        </tr>
+    </table>
     <script nomodule  be-derived='
         Affect parent. //This is set by default.
         Target beScoped:scope. //Not set by default.
@@ -23,7 +33,13 @@
         Derive products from data elements.
         Derive product id as number from value of each instance.
         Derive product description from text content of each instance.
+        Derive balanceSheet via custom derive something else logic from table element.
     '>
+        export const deriveSomethingElse = ({host, element}) => {
+            return [{
+
+            }] // be-derived will merge the value in
+        }
     </script>
 </div>
 ```
@@ -39,6 +55,9 @@ oDiv.beDecorated.scoped.scope = {
         {productId: 21053, description: 'Cherry Tomato'},
         {productId: 21054, description: 'Beef Tomato'},
         {productId: 21055, description: 'Snack Tomato'}
+    ]
+    balanceSheet:  [
+
     ]
 }
 ```
