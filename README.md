@@ -38,7 +38,7 @@ oDiv.beDecorated.scoped.scope = {
     products: [
         {productID: 21053, description: 'Cherry Tomato'},
         {productID: 21054, description: 'Beef Tomato'},
-        {}
+        {productID: 21055, description: 'Snack Tomato'}
     ]
 }
 ```
