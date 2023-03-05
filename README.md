@@ -31,14 +31,14 @@
         Target beScoped:scope. //Not set by default.
         Survey parent. //This is set by default.
     '>
-        <o-m 
+        <obj-ml 
             count-n="{div/button/text()}"
-            day-of-event="{div/time/@datetime}"
+            day-of-event-d="{div/time/@datetime}"
         >
             <xsl:for-each select="div/ul/li">
-                <o-m name="product" id="{data/@value}" description="{data/text()}"></o-m>
+                <obj-ml name="product" id="{data/@value}" description="{data/text()}"></o-m>
             </xsl:for-each> 
-        </o-m>
+        </obj-ml>
     </template>
 </div>
 ```
@@ -60,4 +60,13 @@ oDiv.beDecorated.scoped.scope = {
     ]
 }
 ```
+
+What this does in the middle:
+
+1.  Applies xslt transform of the contents inside the template with the element specified by Survey parameter.
+2.  Invokes an instance of obj-ml web component.
+3.  Sets attributes, innerHTML to the output of the transformation.
+4.  Calls method "attach".
+5.  Pulls value from obj-ml.
+6.  Assigns value to scope.
 
