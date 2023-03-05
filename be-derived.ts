@@ -29,14 +29,13 @@ ${self.innerHTML}
         const xsltProcessor = new XSLTProcessor();
         xsltProcessor.importStylesheet(xsltNode); 
         const resultDocument = xsltProcessor.transformToFragment(xmlSrc, document);
+        if(resultDocument === null) throw 'invalid xml/xslt';
         import('obj-ml/obj-ml.js');
         await customElements.whenDefined('obj-ml');
-        console.log({resultDocument});
-        if(resultDocument !== null){
-            customElements.upgrade(resultDocument);
-        }
-         
-        debugger;    
+        customElements.upgrade(resultDocument);
+        const val = resultDocument.querySelector('obj-ml')?.value;
+        console.log({val});
+           
         return mold;
     }
 
