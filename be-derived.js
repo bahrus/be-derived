@@ -33,6 +33,18 @@ ${self.innerHTML}
         customElements.upgrade(resultDocument);
         const val = resultDocument.querySelector('obj-ml')?.value;
         console.log({ val });
+        let affected = await findRealm(self, affect);
+        if (target !== undefined) {
+            const { beSplit } = await import('be-decorated/cpu.js');
+            const split = await beSplit(target);
+            if (split !== undefined) {
+                const { setProp } = await import('trans-render/lib/setProp.js');
+                await setProp(affected, split.path, val);
+            }
+        }
+        else {
+            Object.assign(affected, val);
+        }
         return mold;
     }
 }

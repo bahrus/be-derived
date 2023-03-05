@@ -45,18 +45,6 @@
             </xsl:for-each> 
         </obj-ml>
     </template>
-
-    <template  >
-    <obj-ml 
-        count-n="{div/button/text()}"
-        day-of-event-d="{div/time/@datetime}"
-        product-arr=""
-    >
-        <xsl:for-each select="div/ul/li">
-            <obj-ml itemprop="product" id="{data/@value}" description="{data/text()}"></o-m>
-        </xsl:for-each> 
-    </obj-ml>
-</template>
     <script type=importmap>
         {
             "imports": {
