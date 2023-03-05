@@ -7,7 +7,51 @@
     <title>Document</title>
 </head>
 <body>
-    <time datetime="2018-07-07T20:00:00">20:00</time>
-    <data value="21053">Cherry Tomato</data>
+    <div>
+        <button>30</button>
+    </div>
+    <template  be-derived='
+        Affect previous element sibling. //This is set by default.
+        Target beScoped:scope. //Not set by default.
+        Survey previous element sibling. //This is set by default.
+    '>
+        <obj-ml 
+            count-n="{div/button/text()}"
+            day-of-event-d="{div/time/@datetime}"
+            product-arr=""
+        >
+            <xsl:for-each select="div/ul/li">
+                <obj-ml itemprop="product" id="{data/@value}" description="{data/text()}"></o-m>
+            </xsl:for-each> 
+        </obj-ml>
+    </template>
+
+    <template  >
+    <obj-ml 
+        count-n="{div/button/text()}"
+        day-of-event-d="{div/time/@datetime}"
+        product-arr=""
+    >
+        <xsl:for-each select="div/ul/li">
+            <obj-ml itemprop="product" id="{data/@value}" description="{data/text()}"></o-m>
+        </xsl:for-each> 
+    </obj-ml>
+</template>
+    <script type=importmap>
+        {
+            "imports": {
+                "be-decorated/": "../node_modules/be-decorated/",
+                "be-exportable/": "../node_modules/be-exportable/",
+                "be-hive/": "../node_modules/be-hive/",
+                "be-scoped/": "../node_modules/be-scoped/",
+                "obj-ml/": "../node_modules/obj-ml/",
+                "trans-render/": "../trans-render/"
+            }
+        }
+    </script>
+    <script type=module>
+        import '../be-derived.js';
+        import 'be-scoped/be-scoped.js';
+    </script>
 </body>
 </html>

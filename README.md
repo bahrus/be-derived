@@ -15,7 +15,7 @@
     <table>
         <tr>
             <th>Month</th>
-            <th>Savings</
+            <th>Savings</th>
         </tr>
         <tr>
             <td>January</td>
@@ -26,21 +26,23 @@
             <td>$300</td>
         </tr>
     </table>
-    <template  be-derived='
-        Affect parent. //This is set by default.
-        Target beScoped:scope. //Not set by default.
-        Survey parent. //This is set by default.
-    '>
-        <obj-ml 
-            count-n="{div/button/text()}"
-            day-of-event-d="{div/time/@datetime}"
-        >
-            <xsl:for-each select="div/ul/li">
-                <obj-ml name="product" id="{data/@value}" description="{data/text()}"></o-m>
-            </xsl:for-each> 
-        </obj-ml>
-    </template>
+
 </div>
+<template  be-derived='
+    Affect previous element sibling. //This is set by default.
+    Target beScoped:scope. //Not set by default.
+    Survey previous element sibling. //This is set by default.
+'>
+    <obj-ml 
+        count-n="{div/button/text()}"
+        day-of-event-d="{div/time/@datetime}"
+        product-arr
+    >
+        <xsl:for-each select="div/ul/li">
+            <obj-ml itemprop="product" id="{data/@value}" description="{data/text()}"></o-m>
+        </xsl:for-each> 
+    </obj-ml>
+</template>
 ```
 
 ...ends up with: 

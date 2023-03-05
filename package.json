@@ -8,6 +8,7 @@
     "be-exportable": "0.0.65",
     "be-hive": "0.0.82",
     "be-propagating": "0.0.2",
+    "obj-ml": "0.0.7",
     "trans-render": "0.0.668"
   },
   "devDependencies": {
