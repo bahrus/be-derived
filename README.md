@@ -15,7 +15,7 @@
     <table>
         <tr>
             <th>Month</th>
-            <th>Savings</th>
+            <th>Savings</
         </tr>
         <tr>
             <td>January</td>
@@ -26,26 +26,20 @@
             <td>$300</td>
         </tr>
     </table>
-    <script nomodule  be-derived='
+    <template  be-derived='
         Affect parent. //This is set by default.
         Target beScoped:scope. //Not set by default.
         Survey parent. //This is set by default.
-        Derive count as number from button.// Uses textContent by default, unless hyper link, in which case it uses href, or input, in which case it uses value.
-        Derive count as number from text content of button. //More explicit.
-        Derive from itemprop attributes. //Applies logic as spelled out by MDN.
-        Derive day of event as date from date time of time element. 
-        Derive products as list from data elements.
-        Derive product id as number from value of each instance.
-        Derive product description from text content of each instance.
-        Derive balanceSheet via custom derive something else logic from table element.
-        Derive savingsByMonth as list from tr elements.
     '>
-        export const deriveSomethingElse = ({host, element}) => {
-            return [{
-
-            }] // be-derived will merge the value in
-        }
-    </script>
+        <o-m 
+            count-n="{div/button/text()}"
+            day-of-event="{div/time/@datetime}"
+        >
+            <xsl:for-each select="div/ul/li">
+                <o-m name="product" id="{data/@value}" description="{data/text()}"></o-m>
+            </xsl:for-each> 
+        </o-m>
+    </template>
 </div>
 ```
 
@@ -67,9 +61,3 @@ oDiv.beDecorated.scoped.scope = {
 }
 ```
 
-From the simple example above, it could be argued that it may best to just send down JSON data itself.  
-
-But be-derived could reduce bandwidth when working with:
-
-1.  Large numbers of products / the unspecified table has lots of rows.  And/or
-2.  If the entire DOM structure shown above is repeated many times, and the hydrating logic which be-derived is part of is not included with each instance, but rather is applied across all such instances.
