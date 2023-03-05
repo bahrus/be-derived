@@ -21,6 +21,10 @@
             <td>January</td>
             <td>$100</td>
         </tr>
+        <tr>
+            <td>February</td>
+            <td>$300</td>
+        </tr>
     </table>
     <script nomodule  be-derived='
         Affect parent. //This is set by default.
@@ -30,10 +34,11 @@
         Derive count as number from text content of button. //More explicit.
         Derive from itemprop attributes. //Applies logic as spelled out by MDN.
         Derive day of event as date from date time of time element. 
-        Derive products from data elements.
+        Derive products as list from data elements.
         Derive product id as number from value of each instance.
         Derive product description from text content of each instance.
         Derive balanceSheet via custom derive something else logic from table element.
+        Derive savingsByMonth as list from tr elements.
     '>
         export const deriveSomethingElse = ({host, element}) => {
             return [{
