@@ -19,6 +19,7 @@
     Survey previous element sibling. //This is set by default.
     Derive count as number from button.
     Derive day of event as date from datetime attribute.
+    Itemize.
 '>
     <obj-ml 
         product-arr

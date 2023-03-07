@@ -9,6 +9,12 @@ export interface VirtualProps extends EndUserProps, MinimalProxy<HTMLTemplateEle
     //canonicalConfig?: CanonicalConfig;
 }
 
+export type propName = string;
+
+export type propType = 'Number' | 'String' | 'Date' | 'Boolean';
+
+export type DeriveStatement = `${propName}As${propType}From${camelQry}`;
+
 export interface CamelConfig{
     Affect?: [Scope];
     affect?: Scope;
@@ -16,6 +22,7 @@ export interface CamelConfig{
     survey?: Scope;
     Target?: [string];
     target?: string;
+    Derive?: 
 }
 
 // export interface CanonicalConfig{
