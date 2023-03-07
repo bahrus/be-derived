@@ -12,30 +12,15 @@
         <li><data value="21054">Beef Tomato</data></li>
         <li><data value="21055">Snack Tomato</data></li>
     </ul>
-    <table>
-        <tr>
-            <th>Month</th>
-            <th>Savings</th>
-        </tr>
-        <tr>
-            <td>January</td>
-            <td>$100</td>
-        </tr>
-        <tr>
-            <td>February</td>
-            <td>$300</td>
-        </tr>
-    </table>
-
 </div>
 <template  be-derived='
     Affect previous element sibling. //This is set by default.
     Target beScoped:scope. //Not set by default.
     Survey previous element sibling. //This is set by default.
+    Derive count as number from button.
+    Derive day of event as date from datetime attribute.
 '>
     <obj-ml 
-        count-n="{div/button/text()}"
-        day-of-event-d="{div/time/@datetime}"
         product-arr
     >
         <xsl:for-each select="div/ul/li">
