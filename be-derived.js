@@ -57,7 +57,7 @@ export class BeDerived extends EventTarget {
         return mold;
     }
 }
-const reDeriveMediumKey = /^(?<propName>[\w\\]+)As(?<propType>(?<!\\)Number|(?<!\\)Date)(?<!\\)(?<camelQry>[\w\\]+)/;
+const reDeriveMediumKey = /^(?<propName>[\w\\]+)As(?<propType>(?<!\\)Number|(?<!\\)Date)(?<!\\)From(?<camelQry>[\w\\]+)/;
 const tagName = 'be-derived';
 const ifWantsToBe = 'derived';
 const upgrade = 'template';

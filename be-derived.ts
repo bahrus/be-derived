@@ -69,7 +69,7 @@ interface ParsedDeriveMediumKey{
     propType: 'number' | 'date',
     camelQry: string,
 }
-const reDeriveMediumKey = /^(?<propName>[\w\\]+)As(?<propType>(?<!\\)Number|(?<!\\)Date)(?<!\\)(?<camelQry>[\w\\]+)/;
+const reDeriveMediumKey = /^(?<propName>[\w\\]+)As(?<propType>(?<!\\)Number|(?<!\\)Date)(?<!\\)From(?<camelQry>[\w\\]+)/;
 
 const tagName = 'be-derived';
 const ifWantsToBe = 'derived';
