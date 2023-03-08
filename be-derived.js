@@ -10,9 +10,10 @@ export class BeDerived extends EventTarget {
         const realmToTransform = await findRealm(self, affect);
         console.log({ Derive });
         if (Derive !== undefined) {
+            const { tryParse } = await import('be-decorated/cpu.js');
             for (const deriveStatement of Derive) {
-                const test = reMediumKey.exec(deriveStatement);
-                console.log({ deriveStatement, test });
+                const parsed = tryParse(deriveStatement, reDeriveMediumKey);
+                console.log({ deriveStatement, parsed });
             }
         }
         if (realmToTransform === null)
@@ -56,7 +57,7 @@ export class BeDerived extends EventTarget {
         return mold;
     }
 }
-const reMediumKey = /^(?<propName>[\w\\]+)As(?<propType>(?<!\\)Number|(?<!\\)Date)(?<!\\)(?<camelQry>[\w\\]+)/;
+const reDeriveMediumKey = /^(?<propName>[\w\\]+)As(?<propType>(?<!\\)Number|(?<!\\)Date)(?<!\\)(?<camelQry>[\w\\]+)/;
 const tagName = 'be-derived';
 const ifWantsToBe = 'derived';
 const upgrade = 'template';

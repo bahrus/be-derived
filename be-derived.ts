@@ -13,9 +13,10 @@ export class BeDerived extends EventTarget implements Actions{
         const realmToTransform = await findRealm(self, affect) as Element;
         console.log({Derive});
         if(Derive !== undefined){
+            const {tryParse} = await import('be-decorated/cpu.js');
             for(const deriveStatement of Derive){
-                const test = reMediumKey.exec(deriveStatement);
-                console.log({deriveStatement, test})
+                const parsed = tryParse(deriveStatement, reDeriveMediumKey) as ParsedDeriveMediumKey;
+                console.log({deriveStatement, parsed});
             }
         }
         if(realmToTransform === null) throw 'bD.404';
@@ -63,8 +64,12 @@ export class BeDerived extends EventTarget implements Actions{
 
 
 }
-
-const reMediumKey = /^(?<propName>[\w\\]+)As(?<propType>(?<!\\)Number|(?<!\\)Date)(?<!\\)(?<camelQry>[\w\\]+)/;
+interface ParsedDeriveMediumKey{
+    propName: string,
+    propType: 'number' | 'date',
+    camelQry: string,
+}
+const reDeriveMediumKey = /^(?<propName>[\w\\]+)As(?<propType>(?<!\\)Number|(?<!\\)Date)(?<!\\)(?<camelQry>[\w\\]+)/;
 
 const tagName = 'be-derived';
 const ifWantsToBe = 'derived';
