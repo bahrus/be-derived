@@ -9,7 +9,7 @@
     "be-hive": "0.0.82",
     "be-propagating": "0.0.2",
     "obj-ml": "0.0.7",
-    "trans-render": "0.0.668"
+    "trans-render": "0.0.669"
   },
   "devDependencies": {
     "be-scoped": "0.0.5",

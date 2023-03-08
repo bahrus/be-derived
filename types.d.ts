@@ -22,7 +22,8 @@ export interface CamelConfig{
     survey?: Scope;
     Target?: [string];
     target?: string;
-    Derive?: 
+    Derive?: DeriveStatement[];
+    //derive?: DeriveStatement[];
 }
 
 // export interface CanonicalConfig{

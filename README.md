@@ -22,7 +22,7 @@
     Itemize.
 '>
     <obj-ml 
-        product-arr
+        product-list
     >
         <xsl:for-each select="div/ul/li">
             <obj-ml itemprop="product" id="{data/@value}" description="{data/text()}"></o-m>
