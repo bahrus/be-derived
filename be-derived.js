@@ -14,7 +14,6 @@ export class BeDerived extends EventTarget {
             const { beSplit } = await import('be-decorated/cpu.js');
             split = await beSplit(target);
         }
-        console.log({ Derive });
         const derivedVals = {};
         if (Derive !== undefined) {
             const { tryParse } = await import('be-decorated/cpu.js');
@@ -29,7 +28,6 @@ export class BeDerived extends EventTarget {
                     const queryInfo = getQuery(camelQry);
                     const { query, attrib } = queryInfo;
                     const srcElement = realmToSurvey.querySelector(query);
-                    console.log({ queryInfo });
                     let val = undefined;
                     if (attrib !== undefined) {
                         val = srcElement.getAttribute(attrib);
@@ -57,7 +55,6 @@ export class BeDerived extends EventTarget {
                 }
                 //console.log({deriveStatement, parsed});
             }
-            console.log({ derivedVals });
         }
         if (realmToTransform === null)
             throw 'bD.404';
