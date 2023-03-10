@@ -32,6 +32,9 @@ export class BeDerived extends EventTarget implements Actions{
         if(self instanceof HTMLTemplateElement){
             const {xslt} = await import('./xslt.js');
             await xslt(self, realmToSurvey, derivedVals);
+        }else if(self instanceof HTMLScriptElement){
+            const {script} = await import('./script.js');
+            await script(self, realmToSurvey, derivedVals);
         }
 
 

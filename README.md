@@ -91,5 +91,34 @@ For even more complex scenarios, use a script tag instead of a template tag, and
 </script>
 ```
 
+## Multiple be-derived elements
+
+If you need to do some derivations via xslt and some via scripting, you will need a template tag **and** a script tag.
+
+Since by default the decorator acts on the previous element, that becomes a problem when using multiple be-derived elements.  To specify to target the div:
+
+```html
+<div itemscope be-scoped>
+    <button>30</button>
+    <span itemprop="greeting">Hello</span>
+    <time datetime="2018-07-07T20:00:00">20:00</time>
+    <ul>
+        <li><data value="21053">Cherry Tomato</data></li>
+        <li><data value="21054">Beef Tomato</data></li>
+        <li><data value="21055">Snack Tomato</data></li>
+    </ul>
+</div>
+<script  be-derived='
+    Affect up search for div. 
+    Target beScoped:scope.
+    Survey up search for div.
+    
+'>
+    export const derive = ({element, derivedVals}) => {
+        derivedVals.someProp = {};
+    }
+</script>
+```
+
 
 

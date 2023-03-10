@@ -29,6 +29,10 @@ export class BeDerived extends EventTarget {
             const { xslt } = await import('./xslt.js');
             await xslt(self, realmToSurvey, derivedVals);
         }
+        else if (self instanceof HTMLScriptElement) {
+            const { script } = await import('./script.js');
+            await script(self, realmToSurvey, derivedVals);
+        }
         if (split !== undefined) {
             const { setProp } = await import('trans-render/lib/setProp.js');
             await setProp(affected, split.path, derivedVals);
