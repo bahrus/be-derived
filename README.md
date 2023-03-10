@@ -108,7 +108,7 @@ Since by default the decorator acts on the previous element, that becomes a prob
         <li><data value="21055">Snack Tomato</data></li>
     </ul>
 </div>
-<script  be-derived='
+<script nomodule be-derived='
     Affect up search for div. 
     Target beScoped:scope.
     Survey up search for div.

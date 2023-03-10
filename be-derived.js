@@ -29,7 +29,7 @@ export class BeDerived extends EventTarget {
             const { xslt } = await import('./xslt.js');
             await xslt(self, realmToSurvey, derivedVals);
         }
-        else if (self instanceof HTMLScriptElement) {
+        else if (self instanceof HTMLScriptElement && self.noModule) {
             const { script } = await import('./script.js');
             await script(self, realmToSurvey, derivedVals);
         }
