@@ -53,6 +53,17 @@ oDiv.beDecorated.scoped.scope = {
 
 The example above also illustrates an additional mechanism for extracting more complex scenarios:  XSLT contained within the template, combined with the [obj-ml](https://github.com/bahrus/obj-ml) custom element.
 
+What this does in detail:
+
+1.  Applies xslt transform of the contents inside the template with the element specified by Survey parameter.
+2.  Invokes an instance of obj-ml web component.
+3.  Sets attributes, innerHTML to the output of the transformation.
+4.  Uses customElement.upgrade.
+5.  Pulls value from obj-ml.
+6.  Assigns value to scope.
+
+
+
 ## Last resort -- scripting [TODO]
 
 For even more complex scenarios, use a script tag instead of a template tag, and specify the deriving function thusly [TODO]:
@@ -79,15 +90,6 @@ For even more complex scenarios, use a script tag instead of a template tag, and
     }
 </script>
 ```
-
-What this does in the middle:
-
-1.  Applies xslt transform of the contents inside the template with the element specified by Survey parameter.
-2.  Invokes an instance of obj-ml web component.
-3.  Sets attributes, innerHTML to the output of the transformation.
-4.  Calls method "attach".
-5.  Pulls value from obj-ml.
-6.  Assigns value to scope.
 
 
 
