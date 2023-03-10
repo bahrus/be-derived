@@ -1,4 +1,4 @@
-# be-derived [TODO]
+# be-derived [WIP]
 
 ## Hemingway Notation.
 
@@ -21,9 +21,7 @@
     Derive day of event as date from datetime attribute.
     Itemize.
 '>
-    <obj-ml 
-        product-list
-    >
+    <obj-ml>
         <xsl:for-each select="div/ul/li">
             <li-ml itemprop="product" id="{data/@value}" description="{data/text()}"></li-ml>
         </xsl:for-each> 
@@ -57,4 +55,6 @@ What this does in the middle:
 4.  Calls method "attach".
 5.  Pulls value from obj-ml.
 6.  Assigns value to scope.
+
+
 

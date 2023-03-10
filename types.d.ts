@@ -15,6 +15,8 @@ export type propType = 'Number' | 'String' | 'Date' | 'Boolean';
 
 export type DeriveStatement = `${propName}As${propType}From${camelQry}`;
 
+export type EmptyString = '';
+
 export interface CamelConfig{
     Affect?: [Scope];
     affect?: Scope;
@@ -23,6 +25,8 @@ export interface CamelConfig{
     Target?: [string];
     target?: string;
     Derive?: DeriveStatement[];
+    Itemize?: EmptyString[];
+    itemize?: boolean;
     //derive?: DeriveStatement[];
 }
 

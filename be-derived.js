@@ -110,7 +110,8 @@ define({
             parseAndCamelize: true,
             camelizeOptions: {
                 doSets: true,
-                simpleSets: ['Affect', 'Survey', 'Target']
+                simpleSets: ['Affect', 'Survey', 'Target'],
+                booleans: ['Itemize'],
             }
         },
         actions: {
