@@ -3,11 +3,10 @@ import { register } from "be-hive/register.js";
 export class BeDerived extends EventTarget {
     async camelToCanonical(pp, mold) {
         const { camelConfig, self } = pp;
-        let { affect, target, survey, Derive } = camelConfig;
+        let { affect, target, survey, Derive, itemize } = camelConfig;
         affect = affect || 'previousElementSibling';
         survey = survey || affect;
         const { findRealm } = await import('trans-render/lib/findRealm.js');
-        //const realmToTransform = await findRealm(self, affect) as Element;
         const realmToSurvey = await findRealm(self, survey);
         if (!(realmToSurvey instanceof Element))
             throw 'bD.404';
@@ -22,7 +21,10 @@ export class BeDerived extends EventTarget {
             const { derive } = await import('./derive.js');
             await derive(Derive, realmToSurvey, derivedVals);
         }
-        //if(realmToTransform === null) throw 'bD.404';
+        if (itemize) {
+            const { itemize: doItemize } = await import('./itemize.js');
+            doItemize(realmToSurvey, derivedVals);
+        }
         if (self.content.childElementCount !== 0) {
             const xmlSrc = realmToSurvey.cloneNode(true);
             const { swap } = await import('trans-render/xslt/swap.js');
