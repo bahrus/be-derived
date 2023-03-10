@@ -5,7 +5,7 @@ export interface EndUserProps {
     camelConfig?: CamelConfig;
 }
 
-export interface VirtualProps extends EndUserProps, MinimalProxy<HTMLTemplateElement>{
+export interface VirtualProps extends EndUserProps, MinimalProxy<HTMLTemplateElement | HTMLScriptElement>{
     //canonicalConfig?: CanonicalConfig;
 }
 
@@ -36,7 +36,7 @@ export interface CamelConfig{
 //     affect: Scope;
 // }
 
-export type Proxy = HTMLTemplateElement & VirtualProps;
+export type Proxy = (HTMLTemplateElement | HTMLScriptElement) & VirtualProps;
 
 export interface PP extends VirtualProps{
     proxy: Proxy
