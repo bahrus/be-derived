@@ -1,4 +1,4 @@
-# be-derived [WIP]
+# be-derived
 
 *be-derived* is an element decorator that derives data from server-rendered HTML.  It can adorn either a template or a script element.
 
@@ -64,7 +64,7 @@ What this does in detail:
 
 
 
-## Last resort -- scripting [TODO]
+## Last resort -- scripting
 
 For even more complex scenarios, use a script tag instead of a template tag, and specify the deriving function thusly [TODO]:
 
