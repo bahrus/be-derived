@@ -25,7 +25,7 @@
         product-list
     >
         <xsl:for-each select="div/ul/li">
-            <obj-ml itemprop="product" id="{data/@value}" description="{data/text()}"></o-m>
+            <li-ml itemprop="product" id="{data/@value}" description="{data/text()}"></li-ml>
         </xsl:for-each> 
     </obj-ml>
 </template>
