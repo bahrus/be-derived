@@ -1,5 +1,9 @@
 # be-derived [WIP]
 
+*be-derived* is an element decorator that derives data from server-rendered HTML.  It can adorn either a template or a script element.
+
+*be-derived* supports multiple ways of extracting data from the HTML.  For common cases, we can utilize easy to read "Hemingway Notation" as shown below:
+
 ## Hemingway Notation.
 
 ```html
@@ -45,6 +49,35 @@ oDiv.beDecorated.scoped.scope = {
 
     ]
 }
+```
+
+The example above also illustrates an additional mechanism for extracting more complex scenarios:  XSLT contained within the template, combined with the [obj-ml](https://github.com/bahrus/obj-ml) custom element.
+
+## Last resort -- scripting [TODO]
+
+For even more complex scenarios, use a script tag instead of a template tag, and specify the deriving function thusly [TODO]:
+
+```html
+<div itemscope be-scoped>
+    <button>30</button>
+    <span itemprop="greeting">Hello</span>
+    <time datetime="2018-07-07T20:00:00">20:00</time>
+    <ul>
+        <li><data value="21053">Cherry Tomato</data></li>
+        <li><data value="21054">Beef Tomato</data></li>
+        <li><data value="21055">Snack Tomato</data></li>
+    </ul>
+</div>
+<script  be-derived='
+    Affect previous element sibling. //This is set by default.
+    Target beScoped:scope. //Not set by default.
+    Survey previous element sibling. //This is set by default.
+    
+'>
+    export const derive = ({element, derivedVals}) => {
+        derivedVals.someProp = {};
+    }
+</script>
 ```
 
 What this does in the middle:
