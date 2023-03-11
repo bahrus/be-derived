@@ -4,7 +4,7 @@
 
 *be-derived* supports multiple ways of extracting data from the HTML.  For common cases, we can utilize easy to read "Hemingway Notation" as shown below:
 
-## Hemingway Notation.
+## (Mostly) Hemingway Notation Example.
 
 ```html
 <div itemscope be-scoped>
@@ -19,7 +19,8 @@
 </div>
 <template  be-derived='
     Affect previous element sibling. //This is set by default.
-    Target beScoped:scope. //Not set by default.
+    Target beScoped:scope. //Not set by default.  
+    //"Target" adds the ability to home in on a property of the affected element.
     Survey previous element sibling. //This is set by default.
     Derive count as number from button.
     Derive day of event as date from datetime attribute.
@@ -27,7 +28,7 @@
 '>
     <obj-ml>
         <xsl:for-each select="div/ul/li">
-            <li-ml itemprop="product" id="{data/@value}" description="{data/text()}"></li-ml>
+            <li-ml itemprop="products" id="{data/@value}" description="{data/text()}"></li-ml>
         </xsl:for-each> 
     </obj-ml>
 </template>
@@ -45,13 +46,10 @@ oDiv.beDecorated.scoped.scope = {
         {productId: 21054, description: 'Beef Tomato'},
         {productId: 21055, description: 'Snack Tomato'}
     ]
-    balanceSheet:  [
-
-    ]
 }
 ```
 
-The example above also illustrates an additional mechanism for extracting more complex scenarios:  XSLT contained within the template, combined with the [obj-ml](https://github.com/bahrus/obj-ml) custom element.
+The example above also illustrates an additional mechanism for extracting data from more complex markup, where Hemingway notation falls flat:  XSLT contained within the template, combined with the [obj-ml](https://github.com/bahrus/obj-ml) custom element.
 
 What this does in detail:
 
@@ -66,7 +64,7 @@ What this does in detail:
 
 ## Last resort -- scripting
 
-For even more complex scenarios, use a script tag instead of a template tag, and specify the deriving function thusly [TODO]:
+For even more complex scenarios, use a script tag instead of a template tag, and specify the deriving function thusly:
 
 ```html
 <div itemscope be-scoped>
@@ -93,7 +91,7 @@ For even more complex scenarios, use a script tag instead of a template tag, and
 
 ## Multiple be-derived elements
 
-If you need to do some derivations via xslt and some via scripting, you will need a template tag **and** a script tag.
+If you need to do some derivations via xslt **and** some via scripting, you will need a template tag **and** a script tag.
 
 Since by default the decorator acts on the previous element, that becomes a problem when using multiple be-derived elements.  To specify to target the div:
 
@@ -108,10 +106,11 @@ Since by default the decorator acts on the previous element, that becomes a prob
         <li><data value="21055">Snack Tomato</data></li>
     </ul>
 </div>
+<template be-derived='...'></template>
 <script nomodule be-derived='
-    Affect up search for div. 
+    Affect previous div. 
     Target beScoped:scope.
-    Survey up search for div.
+    Survey previous div.
     
 '>
     export const derive = ({element, derivedVals}) => {

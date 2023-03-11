@@ -25,9 +25,7 @@
         Derive day of event as date from datetime attribute.
         Itemize.
     '>
-        <obj-ml 
-            product-arr=""
-        >
+        <obj-ml >
             <xsl:for-each select="div/ul/li">
                 <li-ml itemprop="product" id="{data/@value}" description="{data/text()}"></li-ml>
             </xsl:for-each> 
