@@ -6,12 +6,12 @@ export interface EndUserProps {
 }
 
 export interface VirtualProps extends EndUserProps, MinimalProxy<HTMLTemplateElement | HTMLScriptElement>{
-    //canonicalConfig?: CanonicalConfig;
+    canonicalConfig?: CanonicalConfig;
 }
 
 export type propName = string;
 
-export type propType = 'Number' | 'String' | 'Date' | 'Boolean';
+export type propType = 'number' | 'string' | 'date' | 'boolean';
 
 export type DeriveStatement = `${propName}As${propType}From${camelQry}`;
 
@@ -27,14 +27,24 @@ export interface CamelConfig{
     Derive?: DeriveStatement[];
     Itemize?: EmptyString[];
     itemize?: boolean;
-    //derive?: DeriveStatement[];
 }
 
-// export interface CanonicalConfig{
-//     targetPath?: string;
-//     survey: Scope;
-//     affect: Scope;
-// }
+
+export interface DeriveRule {
+    derive: propName,
+    as: propType,
+    from: camelQry,
+    queryInfo: QueryInfo,
+}
+
+export interface CanonicalConfig{
+    affect: Scope;
+    survey: Scope;
+    target?: string;
+    xsltProcessor?: XSLTProcessor;
+    itemize: boolean;
+    deriveRules?: DeriveRule[];
+}
 
 export type Proxy = (HTMLTemplateElement | HTMLScriptElement) & VirtualProps;
 
@@ -44,7 +54,9 @@ export interface PP extends VirtualProps{
 
 export type PPP = Partial<PP>;
 
+export type PPPP = Promise<PPP>;
+
 export interface Actions{
-    camelToCanonical(pp: PP, mold: PPP): Promise<PPP>;
-    //onCanonical(pp: PP, mold: PPP): Promise<PPP>;
+    camelToCanonical(pp: PP, mold: PPP): PPPP;
+    onCanonical(pp: PP, mold: PPP): PPPP;
 }

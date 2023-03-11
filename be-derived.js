@@ -6,6 +6,25 @@ export class BeDerived extends EventTarget {
         let { affect, target, survey, Derive, itemize } = camelConfig;
         affect = affect || 'previousElementSibling';
         survey = survey || affect;
+        const canonicalConfig = {
+            affect,
+            itemize: !!itemize,
+            survey,
+            target,
+        };
+        if (Derive !== undefined) {
+            const { toCanonical } = await import('./derive.js');
+            canonicalConfig.deriveRules = await toCanonical(Derive); //await derive(Derive, realmToSurvey, derivedVals);
+        }
+        if (self instanceof HTMLTemplateElement) {
+            const { toCanonical } = await import('./xslt.js');
+            canonicalConfig.xsltProcessor = toCanonical(self);
+        }
+        return { canonicalConfig };
+    }
+    async onCanonical(pp, mold) {
+        const { self, canonicalConfig } = pp;
+        const { survey, affect, itemize, target, deriveRules, xsltProcessor } = canonicalConfig;
         const { findRealm } = await import('trans-render/lib/findRealm.js');
         const realmToSurvey = await findRealm(self, survey);
         if (!(realmToSurvey instanceof Element))
@@ -17,17 +36,19 @@ export class BeDerived extends EventTarget {
             split = await beSplit(target);
         }
         const derivedVals = {};
-        if (Derive !== undefined) {
-            const { derive } = await import('./derive.js');
-            await derive(Derive, realmToSurvey, derivedVals);
-        }
         if (itemize) {
             const { itemize: doItemize } = await import('./itemize.js');
             doItemize(realmToSurvey, derivedVals);
         }
+        if (deriveRules !== undefined) {
+            const { derive } = await import('./derive.js');
+            derive(deriveRules, realmToSurvey, derivedVals);
+        }
         if (self instanceof HTMLTemplateElement) {
-            const { xslt } = await import('./xslt.js');
-            await xslt(self, realmToSurvey, derivedVals);
+            if (xsltProcessor !== undefined) {
+                const { xslt } = await import('./xslt.js');
+                xslt(xsltProcessor, realmToSurvey, derivedVals);
+            }
         }
         else if (self instanceof HTMLScriptElement && self.noModule) {
             const { script } = await import('./script.js');
@@ -59,7 +80,7 @@ define({
             upgrade,
             ifWantsToBe,
             forceVisible: ['template', 'script'],
-            virtualProps: ['camelConfig'],
+            virtualProps: ['camelConfig', 'canonicalConfig'],
             primaryProp: 'camelConfig',
             primaryPropReq: true,
             parseAndCamelize: true,
@@ -72,6 +93,10 @@ define({
         actions: {
             camelToCanonical: {
                 ifAllOf: ['camelConfig'],
+                ifNoneOf: ['canonicalConfig']
+            },
+            onCanonical: {
+                ifAllOf: ['canonicalConfig'],
                 returnObjMold: {
                     resolved: true,
                 }
