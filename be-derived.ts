@@ -61,7 +61,7 @@ export class BeDerived extends EventTarget implements Actions{
 
 const tagName = 'be-derived';
 const ifWantsToBe = 'derived';
-const upgrade = 'template';
+const upgrade = 'template,script';
 
 define<Proxy & BeDecoratedProps<Proxy, Actions, CamelConfig>, Actions>({
     config:{
@@ -69,7 +69,7 @@ define<Proxy & BeDecoratedProps<Proxy, Actions, CamelConfig>, Actions>({
         propDefaults: {
             upgrade,
             ifWantsToBe,
-            forceVisible: [upgrade],
+            forceVisible: ['template', 'script'],
             virtualProps: ['camelConfig'],
             primaryProp: 'camelConfig',
             primaryPropReq: true,

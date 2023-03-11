@@ -51,14 +51,14 @@ export class BeDerived extends EventTarget {
 // const reDeriveMediumKey = /^(?<propName>[\w\\]+)As(?<propType>(?<!\\)Number|(?<!\\)Date)(?<!\\)From(?<camelQry>[\w\\]+)/;
 const tagName = 'be-derived';
 const ifWantsToBe = 'derived';
-const upgrade = 'template';
+const upgrade = 'template,script';
 define({
     config: {
         tagName,
         propDefaults: {
             upgrade,
             ifWantsToBe,
-            forceVisible: [upgrade],
+            forceVisible: ['template', 'script'],
             virtualProps: ['camelConfig'],
             primaryProp: 'camelConfig',
             primaryPropReq: true,
