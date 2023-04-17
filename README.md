@@ -1,4 +1,4 @@
-# be-derived
+# be-derived [WIP]
 
 *be-derived* is an element decorator that derives data from server-rendered HTML.  It can adorn either a template or a script element.
 
@@ -118,6 +118,8 @@ Since by default the decorator acts on the previous element, that becomes a prob
     }
 </script>
 ```
+
+Not working in FireFox[TODO]
 
 
 
