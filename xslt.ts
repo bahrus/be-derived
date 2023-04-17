@@ -2,13 +2,13 @@ export async function xslt(xsltProcessor: XSLTProcessor, realmToSurvey: Element,
     const xmlSrc = realmToSurvey.cloneNode(true) as Element;
     const {swap} = await import('trans-render/xslt/swap.js');
     swap(xmlSrc, true);
-        const resultDocument = xsltProcessor.transformToFragment(xmlSrc, document);
-        if(resultDocument === null) throw 'invalid xml/xslt';
-        import('obj-ml/obj-ml.js');
-        await customElements.whenDefined('obj-ml');
-        customElements.upgrade(resultDocument);
-        const val = resultDocument.querySelector('obj-ml')?.value;
-        Object.assign(derivedVals, val);
+    const resultDocument = xsltProcessor.transformToFragment(xmlSrc, document);
+    if(resultDocument === null) throw 'invalid xml/xslt';
+    import('obj-ml/obj-ml.js');
+    await customElements.whenDefined('obj-ml');
+    customElements.upgrade(resultDocument);
+    const val = resultDocument.querySelector('obj-ml')?.value;
+    Object.assign(derivedVals, val);
         
         
 }
