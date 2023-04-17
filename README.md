@@ -1,4 +1,9 @@
-# be-derived [WIP]
+# be-derived
+
+[![Playwright Tests](https://github.com/bahrus/be-derived/actions/workflows/CI.yml/badge.svg?branch=baseline)](https://github.com/bahrus/be-derived/actions/workflows/CI.yml)
+[![NPM version](https://badge.fury.io/js/be-derived.png)](http://badge.fury.io/js/be-derived)
+[![How big is this package in your project?](https://img.shields.io/bundlephobia/minzip/be-derived?style=for-the-badge)](https://bundlephobia.com/result?p=be-derived)
+<img src="http://img.badgesize.io/https://cdn.jsdelivr.net/npm/be-derived?compression=gzip">
 
 *be-derived* is an element decorator that derives data from server-rendered HTML.  It can adorn either a template or a script element.
 
