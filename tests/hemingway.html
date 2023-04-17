@@ -26,7 +26,7 @@
         Itemize.
     '>
         <obj-ml >
-            <xsl:for-each select="div/ul/li">
+            <xsl:for-each select="//li">
                 <li-ml itemprop="product" product-id-n="{data/@value}" description="{data/text()}"></li-ml>
             </xsl:for-each> 
         </obj-ml>
@@ -37,6 +37,7 @@
             const d = document.querySelector('div');
             const obj = d.beDecorated.scoped.scope;
             const json = JSON.stringify(obj);
+            console.log({obj});
             if(json.length === 230){
                 target.setAttribute('mark', 'good');
             }

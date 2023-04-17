@@ -119,7 +119,21 @@ Since by default the decorator acts on the previous element, that becomes a prob
 </script>
 ```
 
-Not working in FireFox[TODO]
+>**Note**:  When it comes to XSLT, it seems that the common lineage shared between Chrome and WebKit almost guarantees that the XSLT engines will produce identical results.  Not so with Firefox.  With Firefox (and the other two) this works, which seems like a hack:
+
+```html
+<template>
+    <obj-ml>
+        <xsl:for-each select="//li">
+            <li-ml itemprop="products" id="{data/@value}" description="{data/text()}"></li-ml>
+        </xsl:for-each> 
+    </obj-ml>
+</template>
+```
+
+
+
+
 
 
 
