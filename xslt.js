@@ -1,6 +1,7 @@
 export async function xslt(xsltProcessor, realmToSurvey, derivedVals) {
-    let xmlSrc = realmToSurvey.cloneNode(true);
+    let xmlSrc = realmToSurvey;
     if (navigator.userAgent.indexOf("Firefox") !== -1) {
+        xmlSrc = xmlSrc.cloneNode(true);
         const outer = document.createElement('div');
         outer.appendChild(xmlSrc);
         xmlSrc = outer;
