@@ -6,7 +6,6 @@ export async function xslt(xsltProcessor, realmToSurvey, derivedVals) {
         outer.appendChild(xmlSrc);
         xmlSrc = outer;
     }
-    console.log(xmlSrc.outerHTML);
     const { swap } = await import('trans-render/xslt/swap.js');
     swap(xmlSrc, true);
     const resultDocument = xsltProcessor.transformToFragment(xmlSrc, document);

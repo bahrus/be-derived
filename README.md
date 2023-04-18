@@ -124,17 +124,9 @@ Since by default the decorator acts on the previous element, that becomes a prob
 </script>
 ```
 
->**Note**:  When it comes to XSLT, it seems that the common lineage shared between Chrome and WebKit almost guarantees that the XSLT engines will produce identical results.  Not so with Firefox.  With Firefox (and the other two) this works, which seems like a hack:
+>**Note**:  When it comes to XSLT, it seems that the common lineage shared between Chrome and WebKit almost guarantees that the XSLT engines will produce identical results.  Not so with Firefox.  So although we should always include Firefox in our tests, that is even more the case when using XSLT.
 
-```html
-<template>
-    <obj-ml>
-        <xsl:for-each select="//li">
-            <li-ml itemprop="products" id="{data/@value}" description="{data/text()}"></li-ml>
-        </xsl:for-each> 
-    </obj-ml>
-</template>
-```
+
 
 
 
