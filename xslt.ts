@@ -1,5 +1,11 @@
 export async function xslt(xsltProcessor: XSLTProcessor, realmToSurvey: Element, derivedVals: any){
-    const xmlSrc = realmToSurvey.cloneNode(true) as Element;
+    let xmlSrc = realmToSurvey.cloneNode(true) as Element;
+    if(navigator.userAgent.indexOf("Firefox") !== -1){
+        const outer = document.createElement('div');
+        outer.appendChild(xmlSrc);
+        xmlSrc = outer;
+    }
+    console.log(xmlSrc.outerHTML);
     const {swap} = await import('trans-render/xslt/swap.js');
     swap(xmlSrc, true);
     const resultDocument = xsltProcessor.transformToFragment(xmlSrc, document);
@@ -9,8 +15,7 @@ export async function xslt(xsltProcessor: XSLTProcessor, realmToSurvey: Element,
     customElements.upgrade(resultDocument);
     const val = resultDocument.querySelector('obj-ml')?.value;
     Object.assign(derivedVals, val);
-        
-        
+  
 }
 
 export function toCanonical(self: HTMLTemplateElement){

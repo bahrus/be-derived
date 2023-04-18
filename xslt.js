@@ -1,5 +1,11 @@
 export async function xslt(xsltProcessor, realmToSurvey, derivedVals) {
-    const xmlSrc = realmToSurvey.cloneNode(true);
+    let xmlSrc = realmToSurvey.cloneNode(true);
+    if (navigator.userAgent.indexOf("Firefox") !== -1) {
+        const outer = document.createElement('div');
+        outer.appendChild(xmlSrc);
+        xmlSrc = outer;
+    }
+    console.log(xmlSrc.outerHTML);
     const { swap } = await import('trans-render/xslt/swap.js');
     swap(xmlSrc, true);
     const resultDocument = xsltProcessor.transformToFragment(xmlSrc, document);
