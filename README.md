@@ -127,6 +127,30 @@ Since by default the decorator acts on the previous element, that becomes a prob
 >**Note**:  When it comes to XSLT, it seems that the common lineage shared between Chrome and WebKit almost guarantees that the XSLT engines will produce identical results.  Not so with Firefox.  So although we should always include Firefox in our tests, that is even more the case when using XSLT.
 
 
+## Viewing Locally
+
+1.  Install git.
+2.  Fork/clone this repo.
+3.  Install node.
+4.  Open command window to folder where you cloned this repo.
+5.  > npm install
+6.  > npm run serve
+7.  Open http://localhost:3030/demo in a modern browser.
+
+## Importing in ES Modules:
+
+```JavaScript
+import 'be-importing/be-derived.js';
+
+```
+
+## Using from CDN:
+
+```html
+<script type=module crossorigin=anonymous>
+    import 'https://esm.run/be-derived';
+</script>
+```
 
 
 

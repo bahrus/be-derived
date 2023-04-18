@@ -1,8 +1,24 @@
 {
   "name": "be-derived",
   "version": "0.0.3",
-  "description": "",
-  "main": "index.js",
+  "keywords": [
+    "web-components",
+    "web-component",
+    "custom-element",
+    "custom-elements"
+  ],
+  "description": "Element decorator/behavior that derives data from server-rendered HTML",
+  "main": "be-derived.js",
+  "module": "be-derived.js",
+  "exports": {
+    ".": "./be-derived.js",
+    "./be-derived.js": "./be-derived.js"
+  },
+  "files": [
+    "*.js",
+    "types.d.ts"
+  ],
+  "types": "types.d.ts",
   "dependencies": {
     "be-decorated": "0.0.238",
     "be-exportable": "0.0.68",
@@ -14,8 +30,7 @@
   "devDependencies": {
     "be-scoped": "0.0.8",
     "may-it-serve": "0.0.5",
-    "@skypack/package-check": "0.2.2",
-    "@playwright/test": "1.32.1"
+    "@playwright/test": "1.32.3"
   },
   "scripts": {
     "serve": "node node_modules/may-it-serve/serve.js",
@@ -26,7 +41,7 @@
     "type": "git",
     "url": "git+https://github.com/bahrus/be-derived.git"
   },
-  "author": "",
+  "author": "anderson.bruce.b@gmail.com",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/bahrus/be-derived/issues"
