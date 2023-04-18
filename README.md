@@ -33,7 +33,7 @@
 '>
     <obj-ml>
         <xsl:for-each select="div/ul/li">
-            <li-ml itemprop="products" id="{data/@value}" description="{data/text()}"></li-ml>
+            <li-ml itemprop="products" product-id-n="{data/@value}" description="{data/text()}"></li-ml>
         </xsl:for-each> 
     </obj-ml>
 </template>
