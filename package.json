@@ -20,17 +20,17 @@
   ],
   "types": "types.d.ts",
   "dependencies": {
-    "be-decorated": "0.0.238",
-    "be-exportable": "0.0.68",
-    "be-hive": "0.0.82",
-    "be-propagating": "0.0.5",
+    "be-enhanced": "0.0.13",
+    "be-exportable": "0.0.70",
+    "be-hive": "0.0.91",
+    "be-propagating": "0.0.6",
     "obj-ml": "0.0.9",
-    "trans-render": "0.0.671"
+    "trans-render": "0.0.679"
   },
   "devDependencies": {
     "be-scoped": "0.0.8",
     "may-it-serve": "0.0.5",
-    "@playwright/test": "1.32.3"
+    "@playwright/test": "1.33.0"
   },
   "scripts": {
     "serve": "node node_modules/may-it-serve/serve.js",
