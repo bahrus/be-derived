@@ -20,15 +20,15 @@
   ],
   "types": "types.d.ts",
   "dependencies": {
-    "be-enhanced": "0.0.13",
-    "be-exportable": "0.0.70",
-    "be-hive": "0.0.91",
-    "be-propagating": "0.0.6",
+    "be-enhanced": "0.0.17",
+    "be-exportable": "0.0.71",
+    "be-hive": "0.0.92",
+    "be-propagating": "0.0.7",
     "obj-ml": "0.0.9",
-    "trans-render": "0.0.679"
+    "trans-render": "0.0.680"
   },
   "devDependencies": {
-    "be-scoped": "0.0.9",
+    "be-scoped": "0.0.10",
     "may-it-serve": "0.0.5",
     "@playwright/test": "1.33.0"
   },

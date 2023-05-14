@@ -1,8 +1,22 @@
-import { define } from 'be-decorated/DE.js';
-import { register } from "be-hive/register.js";
-export class BeDerived extends EventTarget {
-    async camelToCanonical(pp, mold) {
-        const { camelConfig, self } = pp;
+import { BE, propDefaults, propInfo } from 'be-enhanced/BE.js';
+import { XE } from 'xtal-element/XE.js';
+import { register } from 'be-hive/register.js';
+export class BeDerived extends BE {
+    static get beConfig() {
+        return {
+            parse: true,
+            primaryProp: 'camelConfig',
+            primaryPropReq: true,
+            parseAndCamelize: true,
+            camelizeOptions: {
+                doSets: true,
+                simpleSets: ['Affect', 'Survey', 'Target'],
+                booleans: ['Itemize'],
+            }
+        };
+    }
+    async camelToCanonical(self) {
+        const { camelConfig, enhancedElement } = self;
         let { affect, target, survey, Derive, itemize } = camelConfig;
         affect = affect || 'previousElementSibling';
         survey = survey || affect;
@@ -16,24 +30,27 @@ export class BeDerived extends EventTarget {
             const { toCanonical } = await import('./derive.js');
             canonicalConfig.deriveRules = await toCanonical(Derive); //await derive(Derive, realmToSurvey, derivedVals);
         }
-        if (self instanceof HTMLTemplateElement) {
+        if (enhancedElement instanceof HTMLTemplateElement) {
             const { toCanonical } = await import('./xslt.js');
-            canonicalConfig.xsltProcessor = toCanonical(self);
+            canonicalConfig.xsltProcessor = toCanonical(enhancedElement);
         }
         return { canonicalConfig };
     }
-    async onCanonical(pp, mold) {
-        const { self, canonicalConfig } = pp;
+    async onCanonical(self) {
+        const { enhancedElement, canonicalConfig } = self;
         const { survey, affect, itemize, target, deriveRules, xsltProcessor } = canonicalConfig;
         const { findRealm } = await import('trans-render/lib/findRealm.js');
-        const realmToSurvey = await findRealm(self, survey);
+        const realmToSurvey = await findRealm(enhancedElement, survey);
         if (!(realmToSurvey instanceof Element))
             throw 'bD.404';
-        let affected = await findRealm(self, affect);
+        let affected = await findRealm(enhancedElement, affect);
         let split;
         if (target !== undefined) {
-            const { beSplit } = await import('be-decorated/cpu.js');
-            split = await beSplit(target);
+            // const {beSplit} = await import('be-enhanced/cpu.js');
+            // split = await beSplit(target);
+            const { getVal } = await import('trans-render/lib/getVal.js');
+            const dotTarget = target[0] === '.' ? target : '.' + target;
+            affected = await getVal({ host: affected }, dotTarget);
         }
         const derivedVals = {};
         if (itemize) {
@@ -44,51 +61,38 @@ export class BeDerived extends EventTarget {
             const { derive } = await import('./derive.js');
             derive(deriveRules, realmToSurvey, derivedVals);
         }
-        if (self instanceof HTMLTemplateElement) {
+        if (enhancedElement instanceof HTMLTemplateElement) {
             if (xsltProcessor !== undefined) {
                 const { xslt } = await import('./xslt.js');
                 xslt(xsltProcessor, realmToSurvey, derivedVals);
             }
         }
-        else if (self instanceof HTMLScriptElement && self.noModule) {
+        else if (enhancedElement instanceof HTMLScriptElement && enhancedElement.noModule) {
             const { script } = await import('./script.js');
-            await script(self, realmToSurvey, derivedVals);
+            await script(enhancedElement, realmToSurvey, derivedVals);
         }
-        if (split !== undefined) {
-            const { setProp } = await import('trans-render/lib/setProp.js');
-            await setProp(affected, split.path, derivedVals);
-        }
-        else {
-            Object.assign(affected, derivedVals);
-        }
-        return mold;
+        Object.assign(affected, derivedVals);
+        // if(split !== undefined){
+        //     const {setProp} = await import('trans-render/lib/setProp.js');
+        //     await setProp(affected, split.path, derivedVals);
+        // }else{
+        // }
+        return {
+            resolved: true
+        };
     }
 }
-// interface ParsedDeriveMediumKey{
-//     propName: string,
-//     propType: 'number' | 'date',
-//     camelQry: string,
-// }
-// const reDeriveMediumKey = /^(?<propName>[\w\\]+)As(?<propType>(?<!\\)Number|(?<!\\)Date)(?<!\\)From(?<camelQry>[\w\\]+)/;
 const tagName = 'be-derived';
 const ifWantsToBe = 'derived';
-const upgrade = 'template,script';
-define({
+const upgrade = '*';
+const xe = new XE({
     config: {
         tagName,
         propDefaults: {
-            upgrade,
-            ifWantsToBe,
-            forceVisible: ['template', 'script'],
-            virtualProps: ['camelConfig', 'canonicalConfig'],
-            primaryProp: 'camelConfig',
-            primaryPropReq: true,
-            parseAndCamelize: true,
-            camelizeOptions: {
-                doSets: true,
-                simpleSets: ['Affect', 'Survey', 'Target'],
-                booleans: ['Itemize'],
-            }
+            ...propDefaults,
+        },
+        propInfo: {
+            ...propInfo
         },
         actions: {
             camelToCanonical: {
@@ -96,15 +100,10 @@ define({
                 ifNoneOf: ['canonicalConfig']
             },
             onCanonical: {
-                ifAllOf: ['canonicalConfig'],
-                returnObjMold: {
-                    resolved: true,
-                }
+                ifAllOf: ['canonicalConfig']
             }
         }
     },
-    complexPropDefaults: {
-        controller: BeDerived,
-    }
+    superclass: BeDerived
 });
 register(ifWantsToBe, upgrade, tagName);
