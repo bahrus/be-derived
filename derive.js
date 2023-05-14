@@ -31,7 +31,7 @@ export async function derive(deriveRules, realmToSurvey, derivedVals) {
     }
 }
 export async function toCanonical(Derive) {
-    const { tryParse } = await import('be-decorated/cpu.js');
+    const { tryParse } = await import('be-enhanced/cpu.js');
     const returnObj = [];
     for (const deriveStatement of Derive) {
         const parsed = tryParse(deriveStatement, reDeriveMediumKey);

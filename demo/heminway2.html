@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <div>
+    <div be-scoped>
         <button>30</button>
         <time datetime="2018-07-07T20:00:00">20:00</time>
         <span itemprop="greeting">Hello</span>
@@ -19,7 +19,7 @@
     </div>
     <template  be-derived='
         Affect previous element sibling. //This is set by default.
-        Target beScoped:scope. //Not set by default.
+        Target beEnhanced:whenResolved|be-scoped:scope. //Not set by default.
         Survey previous element sibling. //This is set by default.
         Derive count as number from button.
         Derive day of event as date from datetime attribute.
@@ -39,7 +39,7 @@
                 "be-hive/": "../node_modules/be-hive/",
                 "be-scoped/": "../node_modules/be-scoped/",
                 "obj-ml/": "../node_modules/obj-ml/",
-                "trans-render/": "../node_modules/trans-render/",
+                "trans-render/": "../trans-render/",
                 "xtal-element/": "../node_modules/xtal-element/"
             }
         }

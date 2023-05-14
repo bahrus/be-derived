@@ -10,7 +10,8 @@ export class BeDerived extends BE {
             parseAndCamelize: true,
             camelizeOptions: {
                 doSets: true,
-                simpleSets: ['Affect', 'Survey', 'Target']
+                simpleSets: ['Affect', 'Survey', 'Target'],
+                booleans: ['Itemize'],
             }
         };
     }
@@ -45,8 +46,11 @@ export class BeDerived extends BE {
         let affected = await findRealm(enhancedElement, affect);
         let split;
         if (target !== undefined) {
-            const { beSplit } = await import('be-enhanced/cpu.js');
-            split = await beSplit(target);
+            // const {beSplit} = await import('be-enhanced/cpu.js');
+            // split = await beSplit(target);
+            const { getVal } = await import('trans-render/lib/getVal.js');
+            const dotTarget = target[0] === '.' ? target : '.' + target;
+            affected = await getVal({ host: affected }, dotTarget);
         }
         const derivedVals = {};
         if (itemize) {
@@ -67,13 +71,12 @@ export class BeDerived extends BE {
             const { script } = await import('./script.js');
             await script(enhancedElement, realmToSurvey, derivedVals);
         }
-        if (split !== undefined) {
-            const { setProp } = await import('trans-render/lib/setProp.js');
-            await setProp(affected, split.path, derivedVals);
-        }
-        else {
-            Object.assign(affected, derivedVals);
-        }
+        Object.assign(affected, derivedVals);
+        // if(split !== undefined){
+        //     const {setProp} = await import('trans-render/lib/setProp.js');
+        //     await setProp(affected, split.path, derivedVals);
+        // }else{
+        // }
         return {
             resolved: true
         };

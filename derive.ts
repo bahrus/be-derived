@@ -1,5 +1,5 @@
 
-import { camelQry } from '../trans-render/lib/types';
+import { camelQry } from 'trans-render/lib/types';
 import {DeriveRule} from './types';
 
 export async function derive(deriveRules: DeriveRule[], realmToSurvey: Element, derivedVals: any){
@@ -33,7 +33,7 @@ export async function derive(deriveRules: DeriveRule[], realmToSurvey: Element, 
 }
 
 export async function toCanonical(Derive: string[]): Promise<DeriveRule[]>{
-    const {tryParse} = await import('be-decorated/cpu.js');
+    const {tryParse} = await import('be-enhanced/cpu.js');
     const returnObj: DeriveRule[] = [];
     for(const deriveStatement of Derive){
         const parsed = tryParse(deriveStatement, reDeriveMediumKey) as ParsedDeriveMediumKey;
