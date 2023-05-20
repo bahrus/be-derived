@@ -20,12 +20,12 @@
   ],
   "types": "types.d.ts",
   "dependencies": {
-    "be-enhanced": "0.0.17",
-    "be-exportable": "0.0.71",
-    "be-hive": "0.0.92",
-    "be-propagating": "0.0.7",
+    "be-enhanced": "0.0.19",
+    "be-exportable": "0.0.72",
+    "be-hive": "0.0.94",
+    "be-propagating": "0.0.8",
     "obj-ml": "0.0.9",
-    "trans-render": "0.0.680"
+    "trans-render": "0.0.681"
   },
   "devDependencies": {
     "be-scoped": "0.0.10",
