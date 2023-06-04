@@ -10,7 +10,7 @@
 		"strict": true,
 	},
 	"files":[
-		"be-derived.ts"
+		"v2/be-derived.ts"
 	],
 	"exclude":[
 		"node_modules"

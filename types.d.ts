@@ -56,7 +56,7 @@ export type ProPAP = Promise<PAP>
 
 export type POA = [PAP | undefined, ActionOnEventConfigs<PAP, Actions>];
 
-export type ProPOA = Promise<POA>
+export type ProPOA = Promise<POA>;
 
 
 export interface Actions{
