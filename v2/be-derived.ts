@@ -8,7 +8,7 @@ import { JSONObject } from 'trans-render/lib/types';
 export class BeDerived extends BE<AP, Actions> implements Actions{
     static override get beConfig(): BEConfig<any> {
         return {
-            parse: false,
+            parse: true,
         }
     }
 
@@ -18,12 +18,19 @@ export class BeDerived extends BE<AP, Actions> implements Actions{
         const derivedObject: JSONObject = {};
         const {childrenParsed} = await import('be-a-beacon/childrenParsed.js');
         await childrenParsed(enhancedElement);
-        console.log('do the processing');
+        let itempropElements = Array.from(enhancedElement.querySelectorAll('[itemprop]'));
+        itempropElements = itempropElements.filter(x => x.closest('[itemscope]') === enhancedElement);
+        const {getItemPropVal} = await import('be-linked/getItemPropVal.js'); //TODO:  rename
+        for(const itempropElement of itempropElements){
+            derivedObject[itempropElement.getAttribute('itemprop')!] = await getItemPropVal(itempropElement);
+        }
+        this.derivedObject = derivedObject;
+        this.resolved = true;
     }
 
     logToConsole(self: this): void {
         const {derivedObject} = self;
-
+        console.log({derivedObject});
     }
 }
 
@@ -38,6 +45,7 @@ const xe = new XE<AP, Actions>({
         tagName,
         propDefaults: {
             ...propDefaults,
+            log: false,
         },
         propInfo:{
             ...propInfo

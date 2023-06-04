@@ -4,7 +4,7 @@ import { register } from 'be-hive/register.js';
 export class BeDerived extends BE {
     static get beConfig() {
         return {
-            parse: false,
+            parse: true,
         };
     }
     async attach(enhancedElement, enhancementInfo) {
@@ -14,10 +14,18 @@ export class BeDerived extends BE {
         const derivedObject = {};
         const { childrenParsed } = await import('be-a-beacon/childrenParsed.js');
         await childrenParsed(enhancedElement);
-        console.log('do the processing');
+        let itempropElements = Array.from(enhancedElement.querySelectorAll('[itemprop]'));
+        itempropElements = itempropElements.filter(x => x.closest('[itemscope]') === enhancedElement);
+        const { getItemPropVal } = await import('be-linked/getItemPropVal.js'); //TODO:  rename
+        for (const itempropElement of itempropElements) {
+            derivedObject[itempropElement.getAttribute('itemprop')] = await getItemPropVal(itempropElement);
+        }
+        this.derivedObject = derivedObject;
+        this.resolved = true;
     }
     logToConsole(self) {
         const { derivedObject } = self;
+        console.log({ derivedObject });
     }
 }
 const tagName = 'be-derived';
@@ -28,6 +36,7 @@ const xe = new XE({
         tagName,
         propDefaults: {
             ...propDefaults,
+            log: false,
         },
         propInfo: {
             ...propInfo
