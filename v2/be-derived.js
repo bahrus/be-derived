@@ -14,6 +14,7 @@ export class BeDerived extends BE {
         const derivedObject = {};
         const { childrenParsed } = await import('be-a-beacon/childrenParsed.js');
         await childrenParsed(enhancedElement);
+        console.log('do the processing');
     }
     logToConsole(self) {
         const { derivedObject } = self;
