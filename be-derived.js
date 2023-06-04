@@ -5,81 +5,19 @@ export class BeDerived extends BE {
     static get beConfig() {
         return {
             parse: true,
-            primaryProp: 'camelConfig',
-            primaryPropReq: true,
-            parseAndCamelize: true,
-            camelizeOptions: {
-                doSets: true,
-                simpleSets: ['Affect', 'Survey', 'Target'],
-                booleans: ['Itemize'],
-            }
         };
     }
-    async camelToCanonical(self) {
-        const { camelConfig, enhancedElement } = self;
-        let { affect, target, survey, Derive, itemize } = camelConfig;
-        affect = affect || 'previousElementSibling';
-        survey = survey || affect;
-        const canonicalConfig = {
-            affect,
-            itemize: !!itemize,
-            survey,
-            target,
-        };
-        if (Derive !== undefined) {
-            const { toCanonical } = await import('./derive.js');
-            canonicalConfig.deriveRules = await toCanonical(Derive); //await derive(Derive, realmToSurvey, derivedVals);
-        }
-        if (enhancedElement instanceof HTMLTemplateElement) {
-            const { toCanonical } = await import('./xslt.js');
-            canonicalConfig.xsltProcessor = toCanonical(enhancedElement);
-        }
-        return { canonicalConfig };
+    async attach(enhancedElement, enhancementInfo) {
+        super.attach(enhancedElement, enhancementInfo);
+        const { childrenParsed } = await import('be-a-beacon/childrenParsed.js');
+        await childrenParsed(enhancedElement);
+        const { getItemScopeObject } = await import('be-linked/getItemScopeObject.js');
+        this.derivedObject = await getItemScopeObject(enhancedElement);
+        this.resolved = true;
     }
-    async onCanonical(self) {
-        const { enhancedElement, canonicalConfig } = self;
-        const { survey, affect, itemize, target, deriveRules, xsltProcessor } = canonicalConfig;
-        const { findRealm } = await import('trans-render/lib/findRealm.js');
-        const realmToSurvey = await findRealm(enhancedElement, survey);
-        if (!(realmToSurvey instanceof Element))
-            throw 'bD.404';
-        let affected = await findRealm(enhancedElement, affect);
-        let split;
-        if (target !== undefined) {
-            // const {beSplit} = await import('be-enhanced/cpu.js');
-            // split = await beSplit(target);
-            const { getVal } = await import('trans-render/lib/getVal.js');
-            const dotTarget = target[0] === '.' ? target : '.' + target;
-            affected = await getVal({ host: affected }, dotTarget);
-        }
-        const derivedVals = {};
-        if (itemize) {
-            const { itemize: doItemize } = await import('./itemize.js');
-            doItemize(realmToSurvey, derivedVals);
-        }
-        if (deriveRules !== undefined) {
-            const { derive } = await import('./derive.js');
-            derive(deriveRules, realmToSurvey, derivedVals);
-        }
-        if (enhancedElement instanceof HTMLTemplateElement) {
-            if (xsltProcessor !== undefined) {
-                const { xslt } = await import('./xslt.js');
-                xslt(xsltProcessor, realmToSurvey, derivedVals);
-            }
-        }
-        else if (enhancedElement instanceof HTMLScriptElement && enhancedElement.noModule) {
-            const { script } = await import('./script.js');
-            await script(enhancedElement, realmToSurvey, derivedVals);
-        }
-        Object.assign(affected, derivedVals);
-        // if(split !== undefined){
-        //     const {setProp} = await import('trans-render/lib/setProp.js');
-        //     await setProp(affected, split.path, derivedVals);
-        // }else{
-        // }
-        return {
-            resolved: true
-        };
+    logToConsole(self) {
+        const { derivedObject } = self;
+        console.log({ derivedObject });
     }
 }
 const tagName = 'be-derived';
@@ -90,17 +28,14 @@ const xe = new XE({
         tagName,
         propDefaults: {
             ...propDefaults,
+            log: false,
         },
         propInfo: {
             ...propInfo
         },
         actions: {
-            camelToCanonical: {
-                ifAllOf: ['camelConfig'],
-                ifNoneOf: ['canonicalConfig']
-            },
-            onCanonical: {
-                ifAllOf: ['canonicalConfig']
+            logToConsole: {
+                ifAllOf: ['resolved', 'log']
             }
         }
     },
