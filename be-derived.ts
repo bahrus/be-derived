@@ -1,6 +1,7 @@
 import {BE, propDefaults, propInfo} from 'be-enhanced/BE.js';
 import {BEConfig, BeSplitOutput} from 'be-enhanced/types';
 import {XE} from 'xtal-element/XE.js';
+import {JSONValue} from 'trans-render/lib/types';
 import {Actions, AllProps, AP, PAP, ProPAP, ProPOA, POA, CamelConfig, CanonicalConfig} from './types';
 import {register} from 'be-hive/register.js';
 
@@ -9,6 +10,7 @@ export class BeDerived extends BE<AP, Actions, HTMLTemplateElement | HTMLScriptE
         return {
             parse: true,
             primaryProp: 'camelConfig',
+            cache: new Map<string, JSONValue>(),
             primaryPropReq: true,
             parseAndCamelize: true,
             camelizeOptions: {
