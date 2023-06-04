@@ -9,11 +9,26 @@
 
 ```html
 <div 
+    itemscope
+    be-derived
     be-sharing='
         Derive.
         Share count from scope.
     '
 >
-    <data itemprop="count" value=30>Thirty</data>
+    <data be-a-beacon itemprop="count" value=30>Thirty</data>
 </div>
 ```
+
+What be-derived does:
+
+1.  Waits for signal from be-a-beacon before commencing (until platform fixes this).
+2.  Extracts a JSON-ld like object from the microdata-laced HTML within its scope.  Stores it in: oDiv.beEnhanced.beDerived.derivedObject
+3.  Indicates it has been resolved.
+
+What be-sharing does:
+
+1.  When it encounters "Derive", ensures that be-derived is employed to derive the object.
+2.  Waits be-derived to finish.
+3.  Suspends any updates to the UI.
+4.  Copies values from derivedObject to scope, host and/or enhanced element according to the rules set out by 
